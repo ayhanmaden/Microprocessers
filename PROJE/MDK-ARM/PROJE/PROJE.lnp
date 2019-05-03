@@ -1,0 +1,24 @@
+--cpu=Cortex-M4.fp
+"proje\startup_stm32f407xx.o"
+"proje\main.o"
+"proje\stm32f4xx_it.o"
+"proje\stm32f4xx_hal_msp.o"
+"proje\stm32f4xx_hal_tim.o"
+"proje\stm32f4xx_hal_tim_ex.o"
+"proje\stm32f4xx_hal_rcc.o"
+"proje\stm32f4xx_hal_rcc_ex.o"
+"proje\stm32f4xx_hal_flash.o"
+"proje\stm32f4xx_hal_flash_ex.o"
+"proje\stm32f4xx_hal_flash_ramfunc.o"
+"proje\stm32f4xx_hal_gpio.o"
+"proje\stm32f4xx_hal_dma_ex.o"
+"proje\stm32f4xx_hal_dma.o"
+"proje\stm32f4xx_hal_pwr.o"
+"proje\stm32f4xx_hal_pwr_ex.o"
+"proje\stm32f4xx_hal_cortex.o"
+"proje\stm32f4xx_hal.o"
+"proje\system_stm32f4xx.o"
+--library_type=microlib --strict --scatter "PROJE\PROJE.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "PROJE.map" -o PROJE\PROJE.axf
