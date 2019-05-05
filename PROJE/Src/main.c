@@ -84,8 +84,8 @@ static void MX_TIM2_Init(void);
 void saydir(uint16_t deger){
 	if(deger==0){
 		
-		TIM1->CCR1=1000;		//A		9'dan 0'a dönerken G segmenti A ve E segmentine
-		HAL_Delay(10);			//			 çapmamasi için 2 segmenti önce biraz asagi
+		TIM1->CCR1=1000;		//A		9'dan 0'a dÃ¶nerken G segmenti A ve E segmentine
+		HAL_Delay(10);			//			 Ã§apmamasi iÃ§in 2 segmenti Ã¶nce biraz asagi
 		TIM2->CCR1=1300;		//E					indirip sonra G segmentini indiriyoruz.
 		HAL_Delay(10);
 		TIM1->CCR2=700;			//B
@@ -255,7 +255,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		
-		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)){					//Eger switch yukari çekilirse buton ile arttiriliyor
+		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)){			//Eger switch yukari Ã§ekilirse buton ile arttiriliyor
 			if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)){
 				saydir(count);
 				HAL_Delay(1000);
@@ -265,7 +265,7 @@ int main(void)
 					count=0;
 				}
 			}	
-		}else if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){		//Eger switch asagi çekilirse otomatik olarak sayiyor
+		}else if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){		//Eger switch asagi Ã§ekilirse otomatik olarak sayiyor
 			
 		TIM1->CCR1=1700;		//A
 		HAL_Delay(10);
@@ -288,7 +288,7 @@ int main(void)
 					HAL_Delay(1000);
 				}
 			}
-		}else{																					//switct orta seviyeye çekilirse sayma islemi duruyor ve tüm segmentler kapaniyor.
+		}else{							//switct orta seviyeye Ã§ekilirse sayma islemi duruyor ve tÃ¼m segmentler kapaniyor.	
 			
 		TIM1->CCR1=1700;		//A
 		HAL_Delay(10);
