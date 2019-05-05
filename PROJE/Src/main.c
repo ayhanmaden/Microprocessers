@@ -64,9 +64,10 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
-uint8_t boolean=0;
-/* USER CODE BEGIN PV */
 
+/* USER CODE BEGIN PV */
+uint8_t count=0;
+uint8_t boolean=0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -83,9 +84,9 @@ static void MX_TIM2_Init(void);
 void saydir(uint16_t deger){
 	if(deger==0){ //700 --> UP  and  1800 --> DOWN
 		
-		TIM1->CCR1=900;			//A
-		HAL_Delay(10);
-		TIM2->CCR1=1200;		//E
+		TIM1->CCR1=1000;		//A		9'dan 0'a dönerken G segmenti A ve E segmentine
+		HAL_Delay(10);			//			 çapmamasi için 2 segmenti önce biraz asagi
+		TIM2->CCR1=1300;		//E					indirip sonra G segmentini indiriyoruz.
 		HAL_Delay(10);
 		TIM1->CCR2=700;			//B
 		HAL_Delay(10);
@@ -253,6 +254,19 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		
+		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)){
+			if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)){
+				saydir(count);
+				HAL_Delay(1000);
+				if(count!=9){
+					count++;
+				}else{
+					count=0;
+				}
+			}	
+		}else if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){
+			
 		TIM1->CCR1=1700;		//A
 		HAL_Delay(10);
 		TIM1->CCR2=1600;		//B
@@ -267,13 +281,50 @@ int main(void)
 		HAL_Delay(10);
 		TIM2->CCR3=1750;		//G
 		HAL_Delay(10);
-		
-		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)){
+			
 			for(uint8_t i=0;i<=9;i++){
-				saydir(i);
-				HAL_Delay(1000);
+				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){
+					saydir(i);
+					HAL_Delay(1000);
+				}
 			}
+		}else{
+			
+		TIM1->CCR1=1700;		//A
+		HAL_Delay(10);
+		TIM1->CCR2=1600;		//B
+		HAL_Delay(10);
+		TIM1->CCR3=1700;		//C
+		HAL_Delay(10);
+		TIM1->CCR4=1700;		//D
+		HAL_Delay(10);
+		TIM2->CCR1=1700;		//E
+		HAL_Delay(10);
+		TIM2->CCR2=1600;		//F
+		HAL_Delay(10);
+		TIM2->CCR3=1750;		//G
+		HAL_Delay(10);
+			
 		}
+		
+		
+//				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)){
+//					saydir(count);
+//					HAL_Delay(1000);
+//					if(count!=9){
+//						count++;
+//					}else{
+//					count=0;
+//					}
+//				}
+		
+		
+//		for(uint8_t i=0;i<=9;i++){
+//				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)){
+//					saydir(i);
+//					HAL_Delay(1000);
+//				}
+//		}
   }
   /* USER CODE END 3 */
 }
@@ -461,8 +512,8 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
 
-  /*Configure GPIO pin : PA0 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  /*Configure GPIO pins : PA0 PA3 PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_3|GPIO_PIN_4;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -470,6 +521,12 @@ static void MX_GPIO_Init(void)
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
 }
 
