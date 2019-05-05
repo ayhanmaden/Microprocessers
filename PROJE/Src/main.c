@@ -288,7 +288,7 @@ int main(void)
 					HAL_Delay(1000);
 				}
 			}
-		}else{																					////switct orta seviyeye çekilirse sayma islemi duruyor ve tüm segmentler kapaniyor.
+		}else{																					//switct orta seviyeye çekilirse sayma islemi duruyor ve tüm segmentler kapaniyor.
 			
 		TIM1->CCR1=1700;		//A
 		HAL_Delay(10);
