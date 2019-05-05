@@ -255,7 +255,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		
-		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)){
+		if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)){					//Eger switch yukari çekilirse buton ile arttiriliyor
 			if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)){
 				saydir(count);
 				HAL_Delay(1000);
@@ -265,7 +265,7 @@ int main(void)
 					count=0;
 				}
 			}	
-		}else if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){
+		}else if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){		//Eger switch asagi çekilirse otomatik olarak sayiyor
 			
 		TIM1->CCR1=1700;		//A
 		HAL_Delay(10);
@@ -283,7 +283,7 @@ int main(void)
 		HAL_Delay(10);
 			
 			for(uint8_t i=0;i<=9;i++){
-				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){
+				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){		//switct orta seviyeye çekilirse sayma islemi duruyor
 					saydir(i);
 					HAL_Delay(1000);
 				}
