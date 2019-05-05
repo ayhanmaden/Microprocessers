@@ -82,7 +82,7 @@ static void MX_TIM2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void saydir(uint16_t deger){
-	if(deger==0){ //700 --> UP  and  1800 --> DOWN
+	if(deger==0){
 		
 		TIM1->CCR1=1000;		//A		9'dan 0'a dönerken G segmenti A ve E segmentine
 		HAL_Delay(10);			//			 çapmamasi için 2 segmenti önce biraz asagi
@@ -283,12 +283,12 @@ int main(void)
 		HAL_Delay(10);
 			
 			for(uint8_t i=0;i<=9;i++){
-				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){		//switct orta seviyeye çekilirse sayma islemi duruyor
+				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_4)){
 					saydir(i);
 					HAL_Delay(1000);
 				}
 			}
-		}else{
+		}else{																					////switct orta seviyeye çekilirse sayma islemi duruyor ve tüm segmentler kapaniyor.
 			
 		TIM1->CCR1=1700;		//A
 		HAL_Delay(10);
@@ -306,25 +306,6 @@ int main(void)
 		HAL_Delay(10);
 			
 		}
-		
-		
-//				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_3)){
-//					saydir(count);
-//					HAL_Delay(1000);
-//					if(count!=9){
-//						count++;
-//					}else{
-//					count=0;
-//					}
-//				}
-		
-		
-//		for(uint8_t i=0;i<=9;i++){
-//				if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)){
-//					saydir(i);
-//					HAL_Delay(1000);
-//				}
-//		}
   }
   /* USER CODE END 3 */
 }
